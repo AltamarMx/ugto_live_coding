@@ -321,7 +321,7 @@ Guillermo Barrios
 </section>
 <section id="comencemos-cargar-los-datos" class="slide level2 smaller">
 <h2>Comencemos: cargar los datos</h2>
-<div id="2f606a2d" class="cell" data-execution_count="1">
+<div id="29b835ff" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -344,7 +344,7 @@ Periodo regiones: 2016-01-27 00:00:00 → 2023-04-22 23:00:00</code></pre>
 </section>
 <section id="demanda-nacional-serie-completa" class="slide level2 smaller">
 <h2>Demanda nacional: serie completa</h2>
-<div id="65937e82" class="cell" data-execution_count="2">
+<div id="1627695a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a>regiones[<span class="st">"NAL_DEMANDA"</span>] <span class="op">=</span> regiones[cols_dem].<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
@@ -369,7 +369,7 @@ Periodo regiones: 2016-01-27 00:00:00 → 2023-04-22 23:00:00</code></pre>
 </section>
 <section id="demanda-por-región" class="slide level2 smaller">
 <h2>Demanda por región</h2>
-<div id="2cba5076" class="cell" data-execution_count="3">
+<div id="95d14c6d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
@@ -390,7 +390,7 @@ Periodo regiones: 2016-01-27 00:00:00 → 2023-04-22 23:00:00</code></pre>
 </section>
 <section id="contribución-regional-a-la-demanda" class="slide level2 smaller">
 <h2>Contribución regional a la demanda</h2>
-<div id="3b0fd2a7" class="cell" data-execution_count="4">
+<div id="22c836b5" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [c.replace(<span class="st">"_DEMANDA"</span>, <span class="st">""</span>) <span class="cf">for</span> c <span class="kw">in</span> cols_dem]</span>
@@ -431,7 +431,7 @@ Periodo regiones: 2016-01-27 00:00:00 → 2023-04-22 23:00:00</code></pre>
 </section>
 <section id="función-para-calcular-el-espectro" class="slide level2 smaller">
 <h2>Función para calcular el espectro</h2>
-<div id="c54e03e0" class="cell" data-execution_count="5">
+<div id="f13d75fe" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-1" class="code-annotation-target"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> welch</span>
 <span id="annotated-cell-5-2"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2">2</button><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> power_spectrum(series, fs<span class="op">=</span><span class="fl">1.0</span>, nperseg<span class="op">=</span><span class="dv">8760</span>):</span>
@@ -467,7 +467,7 @@ Periodo regiones: 2016-01-27 00:00:00 → 2023-04-22 23:00:00</code></pre>
 </section>
 <section id="función-para-graficar-el-espectro" class="slide level2 smaller">
 <h2>Función para graficar el espectro</h2>
-<div id="cba6419b" class="cell" data-execution_count="6">
+<div id="486b2a45" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_spectrum(freqs, psd, title<span class="op">=</span><span class="st">""</span>, ax<span class="op">=</span><span class="va">None</span>):</span>
@@ -516,7 +516,7 @@ Periodo regiones: 2016-01-27 00:00:00 → 2023-04-22 23:00:00</code></pre>
 </section>
 <section id="espectro-por-región-4-comportamientos" class="slide level2 smaller">
 <h2>Espectro por región: 4 comportamientos</h2>
-<div id="ffed2922" class="cell" data-fig-height="6" data-execution_count="7">
+<div id="91580fc1" class="cell" data-fig-height="6" data-execution_count="7">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>ejemplos <span class="op">=</span> {<span class="st">"NE"</span>: <span class="st">"Tipo 1: anual ≈ diario + semanal"</span>,</span>
@@ -542,7 +542,7 @@ Periodo regiones: 2016-01-27 00:00:00 → 2023-04-22 23:00:00</code></pre>
 </section>
 <section id="plegado-de-fase-ciclo-anual" class="slide level2 smaller">
 <h2>Plegado de fase: ciclo anual</h2>
-<div id="829a7b23" class="cell" data-execution_count="8">
+<div id="fba23856" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> curve_fit</span>
@@ -594,7 +594,7 @@ Periodo regiones: 2016-01-27 00:00:00 → 2023-04-22 23:00:00</code></pre>
 <img data-src="latex/img/ciclos_cortos.png" class="quarto-figure quarto-figure-center r-stretch" style="width:90.0%"></section>
 <section id="demanda-vs.-utci-dispersión-estacional" class="slide level2 smaller">
 <h2>Demanda vs.&nbsp;UTCI: dispersión estacional</h2>
-<div id="9ded1f08" class="cell" data-fig-height="6" data-execution_count="9">
+<div id="37d194dc" class="cell" data-fig-height="6" data-execution_count="9">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>season_map <span class="op">=</span> {<span class="dv">12</span>: <span class="st">"Invierno"</span>, <span class="dv">1</span>: <span class="st">"Invierno"</span>, <span class="dv">2</span>: <span class="st">"Invierno"</span>,</span>
@@ -633,7 +633,7 @@ Periodo regiones: 2016-01-27 00:00:00 → 2023-04-22 23:00:00</code></pre>
 </section>
 <section id="el-lazo-diario-demandautci" class="slide level2 smaller">
 <h2>El lazo diario: demanda–UTCI</h2>
-<div id="59c14054" class="cell" data-fig-height="5.5" data-execution_count="10">
+<div id="8da4e8b8" class="cell" data-fig-height="5.5" data-execution_count="10">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>regiones[<span class="st">"hour"</span>] <span class="op">=</span> regiones.index.hour</span>
