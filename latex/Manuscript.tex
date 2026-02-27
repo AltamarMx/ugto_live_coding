@@ -1,0 +1,528 @@
+%% 
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+%%
+%% 
+%%
+%% $Id: elsarticle-template-num.tex 190 2020-11-23 11:12:32Z rishi $
+%%
+%%
+\documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{changes}
+\usepackage{url}
+\setlength {\marginparwidth }{2cm}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+\journal{Energy for Sustainable Development}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%
+\title{Analysis of the relationship between the regional electricity demand and the Universal Thermal Climate Index in Mexico.}
+%\title{Analysis of the electricity generation, demand and its relation with thermal comfort in Mexico}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \affiliation{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%% \fntext[label3]{}
+%We study the link between electricity and thermal comfort, baseline for climate change scenarios.
+
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \affiliation[label1]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%%
+%% \affiliation[label2]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+
+\author[inst1]{Sophia Gomez-Sanchez}
+\affiliation[inst1]{organization={Posgrado en Ingeniería en Energías Renovables, Universidad Nacional Autónoma de México},%Department and Organization
+            addressline={Priv. Xochicalco S/N}, 
+            city={Temixco},
+            postcode={62580}, 
+            state={Morelos},
+            country={México}}
+
+\author[inst2]{O. Rodr\'iguez-Hern\'andez\corref{cor1}}
+\cortext[cor1]{Corresponding author: osroh@ier.unam.mx}
+
+\author[inst2]{Guillermo Barrios}
+
+\affiliation[inst2]{organization={Instituto de Energías Renovables, Universidad Nacional Autónoma de México},%Department and Organization
+            addressline={Priv. Xochicalco S/N}, 
+            city={Temixco},
+            postcode={62580}, 
+            state={Morelos},
+            country={México}}
+
+
+
+\begin{abstract}
+
+This study presents a comprehensive analysis of the relationship between electricity demand and thermal comfort across Mexico, utilizing the Universal Thermal Climate Index (UTCI) derived from ERA5 reanalysis data. The analysis focuses on the interplay between regional electricity demand patterns and meteorological variables, addressing how temperature and related climatic conditions influence energy consumption. Through spectral and temporal evaluations, the study identifies dominant daily, weekly, and annual cycles in electricity usage and correlates these with thermal stress classifications. Results highlight the existence of region-specific demand behaviors, with some areas exhibiting strong seasonal variability and others maintaining stable demand year-round. Notably, higher electricity demand is associated with extreme thermal discomfort—particularly under hot conditions—underscoring the impact of cooling needs. The research underscores the importance of considering climatic stressors in national energy planning, especially in the context of increasing temperatures due to climate change. It also evaluates the technical challenges of integrating renewable energy sources into the national grid, particularly the spatial mismatch between energy generation and consumption zones. The findings support the development of adaptive energy policies that consider biometeorological indices to ensure infrastructure resilience and sustainable electricity distribution under evolving climatic conditions.
+
+\end{abstract}
+
+%%Graphical abstract
+\begin{graphicalabstract}
+\includegraphics[]{GraphAbs.pdf}
+\end{graphicalabstract}
+
+%%Research highlights
+\begin{highlights}
+\item UTCI  is a useful tool to study electricity demand
+\item Strong heat stress promotes electricity demand increase
+\item Cold stress has no influence on electricity demand behavior
+\item Electricity demand and UTCI relation forms a loop
+\item The UTCI index underpins studies on climate change scenarios for electricity demand.
+\end{highlights}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+Reanalysis data \sep 
+Thermal comfort\sep
+Power spectrum analysis \sep
+Energy Transition \sep
+Climate adaptation \sep
+Electricity demand
+%% PACS codes here, in the form: \PACS code \sep code
+\PACS 0000 \sep 1111
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+\MSC 0000 \sep 1111
+\end{keyword}
+
+\end{frontmatter}
+
+%% \linenumbers
+
+%% main text
+\section{Introduction}
+\label{sec:intro}
+
+The transition to sustainable energy necessitates a comprehensive integration of renewable energy sources, posing substantial technical challenges due to their inherent fluctuations over daily cycles, seasonal variations, and geographic differences. This challenge is further exacerbated by the variability in electricity supply, which is strongly linked to weather conditions. A robust understanding of the latter facilitates the appropriate selection of technologies, accurate sizing of installed capacities, effective regional infrastructure development planning, and examination of the impacts of Climate Change on electricity demand. Consequently, weather conditions become instrumental in characterizing patterns of electricity demand. This literature review will examine three core elements: the significant correlation between weather conditions and electricity consumption is initially discussed. Subsequently, the Universal Thermal Climate Index (UTCI), derived from ERA5 reanalysis data, is introduced, and its reliability is evaluated. Then, the research about regional electricity demand data in Mexico and its applications is examined.
+
+% electricity and weather
+
+The analysis of the relationship between weather and electricity demand is essential due to its impact on electricity supply and costs, which vary across different regions \cite{Tanaka_2022}. In Italy, a study was conducted to monitor hourly electricity demand from households distributed throughout the country, focusing on its correlation with temperature. This study revealed that electricity demand experiences an increase when temperatures exceed 24.4°C, indicating significant consequences during extremely hot days \cite{Alberini.2019}. Similarly, research examining the connection between weather and household electricity consumption in Ireland has concluded that weather exerts a substantial influence on electricity demand \cite{Kang_2022}. Recent research indicates that electricity demand in Texas has exhibited increased sensitivity to cold weather. Within the region, population growth accounts for decadal fluctuations, while temperature exerts influence over seasonal variations in electricity demand \cite{Shaffer.2021, Cawthorne.2021}.
+
+The study of electricity consumption in Delhi and other Indian regions has been conducted by analyzing household electricity demand in response to climatic variations, identifying a threshold for high-demand periods when temperatures exceed 30°C. The correlation between temperature and electricity demand exhibits a V-shape configuration, with the slope differing by region. Regions with lower income levels show a diminished capacity to adapt to variations in temperature. \cite{Harish.2020}. From the perspective of households, it has been determined that an increase in temperature by one degree, within the context of seasonal fluctuations, results in an additional energy demand of 5.2 kWh per week. \cite{Conevska.2020}
+
+%% v-shape
+The interaction between temperature and electricity demand is well documented, especially the ``V'' shaped correlation evident in areas where electricity demand is markedly affected by the need to maintain thermal comfort during extreme temperatures, both hot and cold. This relationship between electricity demand and temperature has been observed in Canada, Europe, and the southern United States \cite{Hekkenberg.2009, MacMackin.2019, Cassarino_2018}. This conceptual framework is a foundational basis for analyzing prospective electricity demand patterns in the context of climate change \cite{Hekkenberg.2009}. Social and meteorological determinants in Europe and their connection to electricity demand were examined to outline energy storage requirements. The need for thermal comfort during extreme weather influences these energy profiles and varies depending on whether a country is in Europe's northern or southern regions. Human activity shapes daily patterns, whereas weather influences seasonal and annual variations \cite{Cassarino_2018}. 
+
+
+A critical point in integrating renewable energy sources is the technical limitations imposed by the electricity infrastructure required to connect locations rich in energy resources with those experiencing high energy demands. This implies a significant investment that may hinder the promotion of renewable energy within national systems. Therefore, the analysis performed incorporates a regional perspective. 
+
+%Indicadores
+
+The study of thermal comfort indices is significant due to its impact on well-being and productivity. There are a variety of thermal stress indices that are frequently applied: UTCI, WBGT, HI, and PET/mPET. Operational indices like WBGT help establish work/rest ratios while in hot conditions; however, prolonged heat exposures tend to result in the absence of a specific thermophysiological model, leading to the misclassification of risk exposure in strong solar load or complicated microclimates \cite{ISO7243,Lemke2012,Gao2018}. The heat index was explicitly designed to provide alerts to the public during extreme heat; however, it primarily considers shade, light wind, and a resting individual, omitting short-wave radiation and wind effects \cite{NWS2023,BuzanHuber2020}. Bioclimatic indices such as PET/mPET implicate the outdoor energy balance; however, PET uses predetermined, fixed activity and clothing factors, while mPET requires localized calibration\cite{Hoppe1999,ChenMatzarakis2018}. These common limitations illustrate the rationale for a physiologically based index that has globally recognized limits. Patle et al. reviewed several popular indices, with a focus on tropical and subtropical regions where high temperature and humidity remain constant throughout the year \cite{Patle.2024}. The UTCI integrates temperature, humidity, wind, and radiation into a model of human heat balance, effectively representing thermal stress and influencing heating and cooling needs. Therefore, this index is chosen for analysis because of its comprehensive data compared to temperature alone.
+
+
+%ERA5 used in large system analysis hay que cerrar con UTCI
+Reanalysis data, particularly ERA5, has become indispensable for climate energy applications showing reliable results \cite{Kies.2021sh} due to their high temporal resolution and global coverage. ERA5 has demonstrated excellent fidelity in representing surface air temperature \cite{Clelland2024,Almeida2023} a key input for bio climatic indices such as the Universal Thermal Climate Index (UTCI), as well as reliable representations of precipitation \cite{Lavers2022,Jiang2021, Wang2022}, and extreme events \cite{Rohrer2020, Gleixner2020}. In regions of complex topography, ERA5 reduces temperature biases by up 50\% compared to ERA-Interim \cite{Clelland2024}, and its consistent long-term record underpins robust trend analyses even where in-situ observations are sparse \cite{Wang2022, Almeida2023}, providing  greater confidence in its use for detailed and long-range climate studies \cite{Wang2022, Gleixner2020}. \\
+
+Accordingly, ERA5 has been widely utilized for assessing extensive systems, notably in evaluating thermal comfort through the Universal Thermal Climate Index (UCTI). The UCTI has been integrated into meteorological models to forecast heat stress phenomena such as heat waves \cite{LEROYER201864, VITOLO201921}, and to investigate thermal environment variability across multiple scales \cite{DiNapoli2018, Coccolo2016}, from local to regional. In the context of India \cite{Naskar2024}, ERA5 data encompassing temperature, wind, radiation, and humidity were synthesized to assess the spatial and temporal variations in thermal stress throughout 1990-2020, revealing that the UTCI displays diverse trends across different regions, underscoring the interactive influence of several variables. Furthermore, in Nigeria \cite{Morakinyo_2024}, thermal stress impact was evaluated using ERA5-UCTI by juxtaposing UTCI values derived from the reanalysis against local observational data. The RayMan model was employed to compute this index from critical variables, and its performance was assessed using statistical metrics, demonstrating that the ERA5 UCTI satisfactorily replicates the spatial and temporal variability of thermal stress at various times throughout the day.
+
+
+% How cenace data has been used to study the national electricity system
+%Mexico
+Mexico aspires to achieve a 30\% reduction in emissions from the national electricity generation sector to promote the energy transition. This goal mandates an intensified incorporation of cleaner energy sources into the power mix. Achieving these targets requires a concentrated effort on improving the understanding of renewable energy sources and their dynamics, alongside the temporal and regional variability of electricity demand \cite{10.1126/science.adl6547}. In Mexico, data on hourly regional and national electricity consumption and generation by source are periodically disseminated, enabling various studies to enhance comprehension. This data has been instrumental in developing future scenarios \cite{10.3390/en17174326} with elevated participation of renewable energy and in analyzing how renewable energy sources might decrease Mexico's dependence on imported natural gas \cite{10.1007/s10668-023-03645-8}, with wind energy and solar PV playing crucial roles. Notably, certain regions in the Gulf of Mexico have been identified as potential sites for offshore wind energy \cite{10.1016/j.esd.2022.03.008}, and a specialized scenario for hydrogen production, including its specific impacts, has been proposed \cite{10.1016/j.ijhydene.2024.08.142}. Both of these studies underscore promising areas for the deployment of these technologies. Additionally, national electricity consumption has been analyzed in \cite{10.1088/1742-6596/2699/1/012006}, presenting a mathematical model based on sinusoidal functions. This model integrates social cycles, including daily, weekly, and yearly patterns.
+
+% gap
+Research has consistently demonstrated the significant impact of temperature on electricity consumption patterns. In regions situated at higher latitudes, demand typically increases at both high and low temperatures, creating a ``V''-shaped relationship where the lowest point represents the thermal comfort zone. While studies on electricity production and demand in Mexico exist, regional variations in demand and the influence of weather on the electrical system remain unexplored. Understanding these factors is crucial for forecasting electricity demand under climate change scenarios, considering particular regional necessities. To fill this research gap, a regional variability analysis of UTCI and electricity demand is performed. The index is introduced as a biometeorological measure, as it robustly links outdoor conditions with human well-being. Unlike temperature alone, UTCI accounts for multiple meteorological factors to more thoroughly evaluate thermal comfort. Consequently, this study utilizes the UTCI to investigate the connection between thermal discomfort and electricity demand in Mexico. 
+
+To perform this analysis, the manuscript is organized as follows: first, data sources and methodology are introduced. Subsequently, the formal analysis commences with a temporal depiction of national and regional electricity demand, followed by an exposition of the regional contributions to the national context. Subsequently, an examination of the characteristic frequencies of electricity demand (ED) and the UTCI is undertaken to analyze their correlation, including critical frequencies. Lastly, the conclusions are presented.  
+
+
+
+\section{Data and methodology}
+\label{sec:methodology}
+
+\subsection{Data}
+Two information sources were used to perform this analysis: the regional electricity demand reported by CENACE, and ERA5 UTCI.
+
+\subsubsection{Regional electricity demand}
+The Mexican national electric distribution network comprises nine control regions: Central (CEN), Oriental (ORI), Occidental (OCC), Noroeste (NO), Norte (N), Noreste (NE), and Peninsular (PEN). Additionally, there is a smaller, separate system that includes the Mulege system (MS), Baja California Sur (BCS), and Baja California (BC). However, only seven regions—CEN, ORI, OCC, NO, N, NE, and PEN can trade electricity. The National Center for Energy Control (CENACE, known in Spanish) periodically publishes the national and regional electricity demand at hourly resolution.
+Due to the unavailability of demand data for the Mulege system (MS), this analysis focuses only on the remaining nine regions. In this study, the data chosen spans from 2016 to 2023. Figure \ref{fig:Map_Regions} shows the Mexican electricity regions differentiated by color.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Control_Regions.png}
+    \caption{
+    The Mexican electricity distribution system is divided into ten regions. However, those in the Baja-California peninsula cannot trade energy with the remainder.}
+    \label{fig:Map_Regions}
+\end{figure}
+
+\subsubsection{Universal Thermal Climate Index}
+
+UTCI  is an indicator that describes the thermal stress that weather conditions can produce on people. It is an equivalent temperature expressed in Celsius degrees and is a function of air temperature, mean radiant temperature, wind speed, and water vapor pressure \cite{10.1007/s00484-011-0454-1}. This index is derived from the ERA5 reanalysis data and is part of the Thermal Comfort indices \cite{10.1002/gdj3.102}. It is globally available and computed hourly at the surface level, with a horizontal resolution of $0.25^o$ $\times$ $0.25^o$. UTCI time series are computed using regional and local approaches. The local approach involves geographical interpolation in the UTCI data set of the most populated city within each electricity region. The regional approach averages grid points within each region, synchronizing with electricity demand time stamps. UTC-7 is used for NE, BCS, and BC regions, while UTC-6 is used for others. Table \ref{tab:UTCI} details UTCI thermal stress classifications.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{ll}
+\hline
+UTCI value & Stress Category    \\
+\hline
+above + 46 & Extreme heat    (EH)      \\
++38 to +46 & Very strong heat (VSH)       \\
++32 to +38 & Strong  heat    (SH)       \\
++26 to +32 & Moderated heat   (MH)       \\
++9 to +26  & No thermal stress  (NT)    \\
++ 9 to 0   & Slight cold  (SC) \\
+0 to -13   & Moderated cold (MC)   \\
+-13 to -27 & Strong cold (StC) \\
+-27 to -40 & Very strong cold (VSC)  \\
+below -40  & Extreme cold  (EC)\\  
+\hline
+\end{tabular}
+\end{center}
+\caption{UTCI  values associated with a thermal stress comfort category, thermal discomfort can be associated with hot or cold conditions.}
+\label{tab:UTCI}
+\end{table}
+
+
+
+\subsection{Methodology}
+The analysis is organized into the following separate stages: examining the contribution of regions to electricity demand, investigating long-term trends, and assessing the frequency domain. Next, the UTCI is evaluated in the frequency domain, and its spatial and temporal persistence in each electrical region is analyzed. Finally, the correlation and temporal relationship between electricity demand and UTCI are discussed.
+
+A comprehensive analysis of long-term variability involves assessing electricity demand fluctuations and examining the influence of regional regions on national demand patterns. Each electricity demand time series is subjected to power spectrum analysis to detect periodic trends and identify dominant cycles.
+
+The UTCI time series has been estimated by incorporating both a local and a regional perspective. The local perspective involves calculating the time series through bilinear interpolation of the UTCI variable at the coordinates corresponding to the most populous city within the region. Conversely, the regional perspective entails the estimation of hourly mean values across all grid points within each electricity region. This methodology facilitates the examination of potential limitations between these perspectives. For this purpose, hourly UTCI data covering the period from 2016 to 2023 were acquired from ERA5, aligning temporally with the electricity demand dataset. Table \ref{tab:UTCI_city} provides the latitude and longitude coordinates of the most populous cities within each electricity region used to interpolate local time series.
+
+%PS
+The subsequent analytical phase involves conducting a power spectrum analysis on the UTCI time series, which will be assessed from both local and regional perspectives. Then, the spatial and seasonal distribution of UTCI is initially analyzed at a macro-scale across each electrical region. This analysis involves calculating a seasonal average of UTCI values for each grid point across the national domain, grouping the data by the months corresponding to each season of the year.
+
+
+
+%Metodologia mapa. 
+ \begin{table}[H]
+     \centering
+     \small
+     \begin{tabular}{lcccc}
+         \hline
+         Region & City & Latitude & Longitude & Population\footnote{2020 INEGI} \\ 
+         \hline
+         \hline
+         BC  & Tijuana (TJ) & 32.4926 & -116.9864&1,922,523 \\ 
+         BCS & La Paz (LAP)& 23.0877 & -109.7032&292,241 \\ 
+         NE  & Culiacan (CLN) & 25.6893 & -100.3132&1,003,530 \\ 
+         N   & C. Juarez (CJS) & 31.7111 & -106.4301&1,512,450 \\ 
+         NO  & Monterrey (MTY)& 24.8061 & -107.3949&1,142,994 \\ 
+         OCC & Guadalajara (GDL) & 20.7233 & -103.3931&1,385,629 \\ 
+         ORI & Puebla (PUE) & 19.0450 & -98.2088&1,692,181 \\
+         CEN & Mexico City (CDMX) & 19.4054 & -99.1361& 9,209,944\\ 
+         PEN & Merida (MID) & 20.9779 & -99.1361&995,129 \\ 
+         \hline
+     \end{tabular}
+     \caption{Cities with the largest population within the electrical region. From these locations, UTCI time series were interpolated to perform the subsequent analysis.}
+     \label{tab:UTCI_city}
+ \end{table}
+
+
+Finally, regional and local time series are then analyzed via direct comparison, taking into account daily fluctuations and seasonal patterns. For each season, typical daily UTCI profiles were constructed by averaging hourly values (00:00 to 23:00) across the months defining each season. This approach enabled the characterization of a representative seasonal day based on hourly averages. Finally, a quantitative analysis of seasonal electricity demand deviations was performed by computing the percentage difference relative to winter values. These results were complemented by identifying the maximum hourly UTCI values for each season. Following this methodological sequence, the outcomes are organized in the subsequent section. 
+
+
+\section{Results}
+
+
+\subsection{Regional electricity demand along years.}
+
+
+The initial examination aspect is each region's contribution to the national electricity demand. Annually, regions exhibit similar percentage values concerning national figures. Despite this consistency in percentages, there is an upward trend. In Figure \ref{fig:Dem_Region}, the percentage values of each region are illustrated for 2022, with the centers of the circles positioned in the most densely populated cities within the area. Figure \ref{fig:Dem_TS} illustrates the long-term trend of regional electricity demand by depicting monthly means. Annual variability is evident, with peak values occurring mid-year. The CEN and OCC regions exhibit lower yearly variability.  
+
+\begin{figure}[H]
+  \centering
+  \subfloat[Electricity demand percentual participation per region during 2022.]{\includegraphics[width=0.45\textwidth]{Dem_2022.png}\label{fig:Dem_Region}}
+  \hfill % Espacio horizontal para separar las subfiguras
+  \subfloat[Electricity demand per region in Mexico from 2016 to 2023.]{\includegraphics[width=0.55\textwidth]{TS_Month_Dem.jpeg}\label{fig:Dem_TS}}
+  \caption{In 2022, each region's annual percentage of electricity demand is depicted, with demand participation proportionate to the circle sizes. The figure on the right illustrates the monthly average electricity demand time series for each region, revealing an annual cycle with a discernible upward trend over time.}
+  \label{fig:Dem_Reg_Season}
+\end{figure}
+
+
+
+
+
+\subsection{Electricity demand Power Spectrum}
+
+This section analyzes the power spectrum for each electricity region. An examination of all regions identified four distinct power spectrum shapes. To illustrate these, one example per behavior is presented in Figure \ref{fig:PS_DEM}. Figure \ref{fig:PS_Nal}, shows the National Electricity Demand power spectrum. Three primary cycles are identified: annual, weekly, and daily, with the yearly cycle demonstrating the greatest variability, comparable with the daily cycle. This power spectrum shape is also observed in regions  NE, N and PEN. 
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.45\columnwidth}
+    \centering
+    \includegraphics[width=\textwidth]{PS_Nal.png}
+    \caption{National}
+    \label{fig:PS_Nal}
+\end{subfigure}
+~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+  %(or a blank line to force the subfigure onto a new line)
+\begin{subfigure}[t]{0.45\columnwidth}
+    \centering
+    \includegraphics[width=\textwidth]{PS_BCS.png}
+    \caption{BCS}
+    \label{fig:PS_BCS}
+\end{subfigure}
+~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+%(or a blank line to force the subfigure onto a new line)
+\begin{subfigure}[t]{0.45\columnwidth}
+    \centering
+    \includegraphics[width=\textwidth]{PS_ORI.png}
+    \caption{ORI}
+    \label{fig:PS_ORI}
+\end{subfigure}
+~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+%(or a blank line to force the subfigure onto a new line)
+\begin{subfigure}[t]{0.45\columnwidth}
+    \centering
+    \includegraphics[width=\textwidth]{PS_CEN.png}
+    \caption{CEN}
+    \label{fig:PS_CEN}
+\end{subfigure}
+\caption{Power spectrum of demand time series for every control region in Mexico. Annual, weekly and daily cycles are dominant manifested in different magnitudes in every region.}
+\label{fig:PS_DEM}
+\end{figure}
+The second power spectrum configuration reveals pronounced cycles on annual and diurnal scales, with the magnitudes primarily modulated by yearly fluctuations. Weekly cycles are notably absent in these spectra, with regions such as NO, BC, and BCS displaying this characteristic. An example of this is depicted in Fig. \ref{fig:PS_BCS} for illustration. The ORI power spectrum is presented in Fig. \ref{fig:PS_ORI}; it displays all three typical cycles; however, daily variations substantially influence demand behavior more than annual changes. This same behavior is observed in the OCC region. In contrast, the CEN region, Fig. \ref{fig:PS_CEN}, shows a unique power spectrum shape, is unaffected by annual changes but demonstrates sensitivity to daily and weekly cycles. \\
+
+As seen in Figure \ref{fig:PS_Nal}, peaks appear annually, weekly, and daily, with subharmonics at 3.5 days and 12 hours, denoted by $\tau$. Figure \ref{fig:frequencies} translates these spectral modes into the time domain via \emph{phase folding}. The blue lines represent the original time series of the electricity demand at different scales to better visualize $\tau$, the orange lines represent a sinusoidal signal with matching frequencies.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{fit_frequencies.png}
+    \caption{Phase-folded reconstructions and harmonic fits of the dominant periods identified by the power-spectrum analysis. In each figure, the blue curve shows the phase-folded mean cycle of the data for the indicated period and the orange dashed curve shows a first-order sinusoidal  fit for a) $\tau =1$ year, b) $\tau = 7$ days, c) $\tau = 3.5$ days, d) $\tau =24$ hours, and e) $\tau = 12$ hours. Three consecutive cycles are displayed for clarity, while panel (a) shows one annual cycle. Vertical dashed lines mark cycle boundaries.}
+    \label{fig:frequencies}
+\end{figure}
+
+Phase folding aligns the phase of the analyzed period; consequently, slower components (larger $\tau$) act as an envelope for faster oscillations rather than being removed. Thus, the weekly reconstructions retain the diurnal (24 h) and semidiurnal (12 h) components, and the 3.5-day pattern corresponds to the second harmonic of the weekly cycle, potentially associated with weekday-weekend asymmetry. The temporal morphology is consistent with the peaks observed in the power spectrum in Figure 3, while relative magnitudes vary by region: configurations with no pronounced weekly cycle (e.g., NO, BC, BCS), others where diurnal variability exceeds the annual (ORI and OCC) and CEN is sensitive to daily/weekly cycles but lacks a strong annual signature.  
+%Cerra
+
+
+
+
+\subsection{UTCI Power spectrum}
+
+This study analyzes UTCI power spectrum data at regional and local levels. It finds that annual and diurnal cycles seen in electricity demand are mirrored in the UTCI, except weekly cycles likely influenced by human activity. Maximum and minimum variability in annual and daily cycles are maintained in regional UTCI and electricity demand at ORI, OCC, CEN, N, and BCS CEN. This relation is observed in regional UTCI series at ORI, CEN, and OCC, but not in other regions. Thermal comfort significantly impacts the frequency demand profile. Furthermore, the variability magnitude at each frequency is critical in influencing electricity demand patterns. Fig. \ref{fig:PS_UTCI} shows the Power Spectrum of the local interpolated time series.
+
+
+\begin{figure}[H]
+\begin{subfigure}[t]{0.32\columnwidth}
+    \centering
+    \includegraphics[width=\textwidth]{PS_BCS_city.png}
+    \caption{BCS}
+    \label{fig:UTCI_PS_BCS}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.32\columnwidth}
+    \centering
+    \includegraphics[width=\textwidth]{PS_ORI_city.png}
+    \caption{ORI}
+    \label{fig:UTCI_PS_ORI}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.32\columnwidth}
+    \centering
+    \includegraphics[width=\textwidth]{PS_CEN_city.png}
+    \caption{CEN}
+    \label{fig:UTCI_PS_CEN}
+\end{subfigure}
+\caption{Power spectrum of UTCI local time series for BCS, ORI and CEN control region. Annual and daily cycles are dominant manifested in different magnitudes in every region.}
+\label{fig:PS_UTCI}
+\end{figure}
+
+
+
+
+\subsection{UTCI spatial persistency}
+The analysis of seasonal UTCI persistence across Mexico's electrical regions provides essential insights into its relationship with electricity demand. Figure \ref{fig:Map_utci} shows the seasonal average UTCI maps for the entire analyzed period. Only four of the ten UTCI thermal stress categories are observed within the regions; in general, transition along seasons is observed from Slight Cold (SC) stress to Strong Heat stress (SH).
+
+UTCI distribution in Mexico reveals three main spatial patterns. These include areas with stable no-thermal or moderate thermal stress, areas lacking cold stress, and areas transitioning from cold to heat stress. The Central (CEN), Western (OCC), and western Oriental (ORI) regions mainly exhibit no thermal or moderate heat stress, displaying some spatial variability. Meanwhile, the Peninsular (PEN) and eastern (ORI) consistently face moderate heat stress across most seasons. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Seasonal_Utci_2.jpg}
+    \caption{Seasonal spatial distribution of the UTCI across Mexico for spring (MAM), summer (JJA), autumn (SON), and winter (DJF). Distinct patterns od spatial persistence are observed across the electrical regions.Coastal zones show consistently high UTCI (MH and SH), northern areas alternate between heat (MH, SH) and cold (SC) stress, while the central highlands remain in lower, thermally neutral conditions (NT).  }
+    \label{fig:Map_utci}
+\end{figure}
+
+The northern regions (N, NO, NE) demonstrate marked seasonality and spatial heterogeneity, transitioning from moderate (NE and N) to strong heat stress (NO) in summer to light cold stress in winter. The Baja California Peninsula (BC, BCS) exhibits a mixed seasonal pattern characterized by strong  heat stress in summer, particularly pronounced in the desert interior of BC, and neutral or slightly cold  conditions in winter. 
+
+
+
+\subsection{Electricity Demand and UTCI time correlation}
+
+The correlation between electricity demand and temperature is frequently examined; from this study, significant relationships emerge in a ``V'' shape, showing that electricity demand increases at extreme temperatures, both high and low. In this section, instead of temperature, we use the UTCI regional to assess the association between these variables. Typically, temporal aspects are overlooked in correlation studies; thus, seasonality and daily patterns are included to improve the analysis. In order to determine the seasonal effects on electricity demand, seasonal histograms are incorporated into the accompanying scatter plot on the right. Each season is distinguished by color: blue for winter, orange for spring, green for summer, and red for autumn. Additionally, electricity demand histograms are positioned at the top of each plot. Daily patterns are expressed by calculating the UTCI hourly average  for each season, which is then correlated with the seasonal electricity demand's hourly mean. Triangles, circles, and squares correspond to time indexes related to 00:00, 12:00, and 23:00 hours, respectively, offering enhanced insights into system dynamics. It should be noted that an analogous analysis was conducted utilizing UTCI local time series; overall, the dynamic results remain consistent, although the UTCI at a regional scale exhibits more pronounced vertical fluctuations compared to local UTCI values. Both comparisons can be reviewed in the supplementary material.
+
+Figure \ref{fig:demand_utci} illustrates the relationship between UTCI and electricity demand across various regions. Upon detailed analysis, three seasonal patterns emerge: those lacking cold discomfort, those with SC minimal thermal stress, and those ranging from slight cold (SC) to high heat stress (VSH); thus, only PEN, CEN, and NO regions are presented. In the PEN region with consistently high UTCI values, electricity usage is persistently high throughout the year. Conversely, areas with moderate UTCI values (ORI, CEN, OCC) maintain stable electricity demand, with broader horizontal displacement. However, regions experiencing strong heat stress (N, NE, NO, BC) see marked demand increases in summer and significant decreases in winter. The absence of a ``V'' shape indicates that the regions analyzed do not experience significant improvements in electricity demand at low UTCI values. 
+
+
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=\linewidth]{img/UTCI_DEM.png}
+%    \caption{The scatter plots of UTCI and electricity demand incorporates seasonal and daily cycles. Seasonal histograms are displayed on the right, and is observed that electricity demand peaks occurs during summer, however CEN, ORI, and OCC regions exhibit similar daily patterns regardless of the season.}
+%    \label{fig:demand_utci}
+%\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{pen-cen-no.png}
+
+  \caption{The scatter plots depicting the UTCI alongside electricity demand illustrate both seasonal and daily cycles. Seasonality is represented by color-coded histograms on the right, which correspond to the color scheme of the scatter plot. The daily cycle is expressed by the solid line by estimating the hourly mean values aggregated by season. Among the nine regions three general patterns are observed: no cold discomfort, minimal thermal stress, and mild to severe heat stress, encompassing only the PEN, CEN, and NO regions.}
+  \label{fig:demand_utci}
+\end{figure}
+
+Figure \ref{fig:loop} presents the general patterns of diurnal cycles as depicted in the scatterplots, which reveal two principal configurations: a triangular loop and a figure-eight loop. The vertices of the triangular loop are defined by the minimum UTCI value (M) and the peaks in electricity demand, denoted as P1 and P2. Triangle line values start from a minimum M early in the morning and ascend to P1 by midday. In the afternoon, UTCI values decline until reaching P2, after which nighttime sees a rapid decrease in electricity demand until M.  The figure-eight configuration typically manifests at night when the electricity demand diminishes and the UTCI values reach their nadir, preceding the onset of daytime and rising demand. In regions where seasonality has a significant impact, these patterns might show an upward-right shift, whereas areas with minimal seasonal UTCI variation generally exhibit a horizontal displacement. An increase in seasonal demand is observed when P1 values enter the strong heat (SH) discomfort zone, which is bounded by UTCI values ranging from +32 to +38.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{shapes.png}
+    \caption{Two primary patterns in diurnal cycles depicted through scatterplot. Triangular (left side) loop is marked by three key points: the minimum UTCI value (M) and two electricity demand peaks (P1 and P2). Figure-eight loop (right side) appears at night, correlating with decreased electricity demand and low UTCI values, just before daytime increases in demand occur.}
+    \label{fig:loop}
+\end{figure}
+
+Figure \ref{fig:desviation} shows the percentage differences in electricity demand between winter and the remaining seasons; also, peak UTCI values are integrated into the graphical description to study regions CEN, PEN, and NO. Colored dots represent the same different stress levels, from no thermal stress to very strong stress.  The PEN region experiences consistent heat stress throughout the year. In contrast, the CEN region records strong heat stress in spring, while other seasons exhibit moderate conditions; however, seasonal changes have no significant influence on electricity demand behavior.  Greater electricity demand variability is observed in the NO region, highlighting significant summer thermal stress; summer consumption reaches nearly twice the winter baseline, representing the region's highest electricity demand.
+
+\begin{figure}[H]
+  \centering
+\includegraphics[width=\linewidth]{UTCI_var.png}
+
+\caption{Electricity demand varies seasonally across regions compared to winter. The PEN region experiences near 20\% higher demand in warmer seasons due to heat stress. The CEN region maintains stable demand, likely due to consistent thermal comfort conditions. The NO region shows the highest variability, with summer demand nearly doubling.}
+  \label{fig:desviation}
+\end{figure}
+
+
+
+
+\section{Conclusions}
+This study investigates the relationship between the Universal Thermal Climate Index (UTCI) and electricity demand across various electric regions within Mexico. Analysis of electricity demand over time revealed that although demand increases annually, regional proportions remain consistent. National electricity demand exhibits periodicity on daily, weekly, and annual cycles. These fundamental cycles are evident in the regions examined; however, some are absent depending on geographic location. The magnitude of electricity demand at annual and daily scales in specific areas is predominantly influenced by thermal comfort variability. Consequently, demand behavior can be attributed to variations in thermal comfort, with increased demand at higher temperatures due to cooling requirements, unlike higher latitudes where heating is prevalent. The dynamics of UTCI and demand are comprehensively accounted for across days and seasons. A daily loop, defined by peaks and minimum demand and UTCI values, delineates system dynamics explaining how demand surges under particular thermal comfort conditions. By classifying thermal comfort stress, various geographic conditions can be analyzed, offering crucial insights for regional comparisons and improving comprehension of electricity demand patterns. In Mexico, the central region experiences consistent no thermal stress, whereas coastal areas exhibit high stress values, which correlate with electricity demand behavior. More detailed assessments can be conducted with precise node electricity demand data, enhancing UTCI evaluations by omitting regional information where the grid lacks coverage. In Mexico, the UTCI, which is based on meteorological variables, provides valuable information to understand electricity demand behavior. In the face of the escalating challenge of climate change, with average temperatures predicted to surge, this study serves as a robust foundation for constructing future scenarios of increasing electricity demand across various regions. As temperatures climb, the insights garnered here will prove indispensable in predicting and preparing for how demand patterns will shift, adapting our infrastructure to swiftly evolving climatic conditions and ensuring that our response is as dynamic and resilient as the climate pressures facing us.
+
+
+
+\section{Data availability}\label{sec:data_availability}
+
+All data required to reproduce the results of this study are
+openly available in the public repository \url{https://github.com/AltamarMx/UTCI-supplementary/}
+In the folder \texttt{data/} are contained the processed hourly
+\texttt{.parquet} files used in the analysis:
+\begin{itemize}
+  \item \texttt{demand\_utci\_regions.parquet}
+  \item \texttt{demand\_utci\_cities.parquet}
+\end{itemize}
+
+A self-contained HTML document that embeds every figure (UTCI vs.\ hourly
+demand) and the regional station-by-station demand–difference tables is
+hosted at \url{https://altamarmx.github.io/UTCI-supplementary/}.
+
+
+
+%Conclusiones relevantes: No hay comportamiento en forma de V asociada a uso de calefaciion 
+\section*{Funding}
+Sophia Gomez-Sanchez acknowledges financial support granted by the Secretar\'ia de Ciencia, Humanidades, Tecnolog\'ia e Innovaci\'on (SECTI), through the National Autonomous University of Mexico (UNAM).
+\section*{Acknowledgements}
+
+The authors would like to thank MSc. Kevin Alquicira Hernández for his technical support in the local computational servers of the Instituto de Energ\'ias Renovables.
+
+\section*{Author contributions}
+\textbf{Sophia Gomez-Sanchez}: Conceptualization, Data curation, Investigation, Methodology, Visualization, Writing – original draft, Writing – review and editing.
+
+\textbf{O. Rodríguez Hernández}: Conceptualization, Data curation, Formal analysis, Investigation, Methodology, Project administration, Supervision, Writing – original draft, Writing – review and editing.
+
+\textbf{Guillermo Barrios}: Data curation, Formal analysis, Visualization,  Writing – review and editing.
+
+
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+ \bibliographystyle{elsarticle-harv} 
+ \bibliography{refs}
+
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+
+% \begin{thebibliography}{00}
+
+% %% \bibitem{label}
+% %% Text of bibliographic item
+
+% \bibitem{}
+
+% \end{thebibliography}
+\end{document}
+\endinput
+%%
+%% End of file `elsarticle-template-num.tex'.

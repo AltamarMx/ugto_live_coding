@@ -1,0 +1,409 @@
+---
+title: "Demanda eléctrica y confort térmico en México"
+subtitle: "Análisis de la relación entre la demanda eléctrica regional y el Índice Universal de Clima Térmico (UTCI)"
+author:
+  - Sophia Gomez-Sanchez
+  - O. Rodríguez-Hernández
+  - Guillermo Barrios
+institute: "Instituto de Energías Renovables, UNAM"
+date: today
+format:
+  revealjs:
+    theme: default
+    slide-number: true
+    code-fold: false
+    code-overflow: wrap
+    code-line-numbers: false
+    highlight-style: github
+    fig-align: center
+    width: 1280
+    height: 720
+    transition: slide
+execute:
+  echo: true
+  warning: false
+  cache: false
+jupyter: python3
+code-annotations: hover
+---
+
+## Resumen {.smaller}
+
+Este estudio analiza la relación entre la **demanda eléctrica** y el **confort térmico** en las regiones eléctricas de México, utilizando el **Índice Universal de Clima Térmico (UTCI)** derivado de datos de reanálisis ERA5.
+
+- Se identifican ciclos **diarios, semanales y anuales** en la demanda eléctrica mediante análisis espectral.
+- Se correlacionan los patrones de demanda con las clasificaciones de estrés térmico del UTCI.
+- Se observa que la demanda aumenta significativamente bajo **estrés por calor intenso**, pero **no se observa** el patrón en forma de "V" típico de latitudes altas.
+- La dinámica diaria demanda-UTCI forma **lazos triangulares y en forma de ocho**.
+- Los resultados ofrecen una base para construir **escenarios de cambio climático** sobre demanda eléctrica regional.
+
+## Contenido
+
+1. Motivación y contexto
+2. Datos: regiones eléctricas y UTCI
+3. **Live coding:**
+   - Análisis exploratorio de datos
+   - Espectro de potencia
+   - Plegado de fase
+   - Dispersión UTCI - Energía
+4. Hallazgos clave y conclusiones
+
+## Motivación
+
+::: {.incremental}
+- La **transición energética** en México busca reducir 30% las emisiones del sector eléctrico.
+- Las fuentes renovables dependen del clima $\rightarrow$ la demanda eléctrica **también**.
+- Entender la relación clima–demanda es clave para:
+  - Dimensionar capacidad instalada
+  - Planificar infraestructura regional
+  - Construir escenarios de **cambio climático**
+- En latitudes altas la relación temperatura–demanda forma una **"V"** (calefacción + refrigeración).
+:::
+
+
+## Regiones eléctricas de México
+
+![](latex/Control_Regions.png){fig-align="center" width=70%}
+
+
+## UTCI: Índice Universal de Clima Térmico {.smaller}
+
+:::: {.columns}
+::: {.column width="50%"}
+Temperatura equivalente (°C) que integra:
+
+- Temperatura del aire
+- Temperatura media radiante
+- Velocidad del viento
+- Presión de vapor de agua
+
+Fuente: **ERA5** reanálisis, resolución horaria, 0.25° × 0.25°.
+:::
+::: {.column width="50%"}
+
+| UTCI (°C) | Categoría |
+|:---------:|-----------|
+| > +46 | Calor extremo (EH) |
+| +38 a +46 | Calor muy fuerte (VSH) |
+| +32 a +38 | Calor fuerte (SH) |
+| +26 a +32 | Calor moderado (MH) |
+| +9 a +26 | Sin estrés térmico (NT) |
+| +9 a 0 | Frío ligero (SC) |
+| 0 a −13 | Frío moderado (MC) |
+
+:::
+::::
+
+## Comencemos: cargar los datos {.smaller}
+
+```{python}
+#| code-fold: false
+#| code-summary: "Código"
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({'font.size': 12, 'figure.dpi': 100})
+
+regiones = pd.read_parquet("data/demanda_utci_regions.parquet")
+ciudades = pd.read_parquet("data/demanda_utci_ciudades.parquet")
+
+print(f"Regiones: {regiones.shape}  |  Ciudades: {ciudades.shape}")
+print(f"Periodo regiones: {regiones.index.min()} → {regiones.index.max()}")
+
+cols_dem = [c for c in regiones.columns if "DEMANDA" in c]
+cols_utci = [c for c in regiones.columns if "UTCI" in c]
+```
+
+
+## Demanda nacional: serie completa {.smaller}
+
+```{python} 
+#| code-fold: true
+#| code-summary: "Código"
+regiones["NAL_DEMANDA"] = regiones[cols_dem].sum(axis=1)
+
+fig, ax = plt.subplots(figsize=(12, 6))
+ax.plot(regiones["NAL_DEMANDA"])
+ax.set_ylabel("Demanda (MW)")
+ax.set_title("Demanda eléctrica nacional horaria")
+ax.set_ylim(20_000,51000)
+ax.set_xlabel("")
+plt.tight_layout()
+plt.show()
+```
+
+
+## Demanda por región {.smaller}
+
+```{python}
+#| code-fold: true
+#| code-summary: "Código"
+fig, ax = plt.subplots(figsize=(12,6))
+for col in  cols_dem:
+    ax.plot(regiones[col],label=col.replace("_DEMANDA", ""))
+ax.legend(ncol=len(cols_dem), loc="upper center", fontsize=9)
+plt.tight_layout()
+plt.show()
+```
+
+
+
+## Contribución regional a la demanda {.smaller}
+
+```{python}
+#| code-fold: true
+#| code-summary: "Código"
+labels = [c.replace("_DEMANDA", "") for c in cols_dem]
+
+fig, ax = plt.subplots(figsize=(12, 6))
+ax.stackplot(regiones.index, *[regiones[c].values for c in cols_dem],
+             labels=labels)
+ax.set_ylabel("Demanda (MW)")
+ax.legend(ncol=len(cols_dem), loc="upper center", fontsize=9)
+plt.tight_layout()
+plt.show()
+```
+
+
+
+## Espectro de potencia: concepto {.smaller}
+
+:::: {.columns}
+::: {.column width="60%"}
+El **espectro de potencia** descompone la señal en sus frecuencias constituyentes.
+
+Permite identificar **ciclos dominantes**:
+
+- **Anual** (~8760 h): estacionalidad climática
+- **Semanal** (~168 h): actividad humana
+- **Diario** (~24 h): ciclo social + solar
+- **Subarmónicos**: 3.5 días, 12 h
+:::
+::: {.column width="40%"}
+![](latex/PS_Nal.png){width=100%}
+
+*Espectro nacional (referencia del artículo)*
+:::
+::::
+
+
+## Función para calcular el espectro {.smaller}
+
+
+```{python}
+
+
+from scipy.signal import welch # <1>
+
+def power_spectrum(series, fs=1.0, nperseg=8760): # <2>
+    clean = series.dropna().values # <3>
+    freqs, psd = welch(clean, fs=fs, nperseg=min(nperseg, len(clean)//2), # <4>
+                       scaling='density')
+    return freqs, psd # <5>
+```
+
+1. Importamos el método de Welch para estimar la densidad espectral de potencia.
+2. `fs=1.0` porque los datos son horarios (1 muestra/hora); `nperseg=8760` ≈ 1 año.
+3. Eliminamos valores nulos antes de calcular.
+4. `welch` divide la señal en segmentos superpuestos y promedia sus periodogramas.
+5. Retorna las frecuencias y la densidad espectral de potencia (PSD).
+
+
+## Función para graficar el espectro {.smaller}
+
+
+```{python}
+#| code-fold: true
+#| code-summary: "Código"
+def plot_spectrum(freqs, psd, title="", ax=None):
+    if ax is None:
+        fig, ax = plt.subplots(figsize=(9, 3.5))
+    period_h = 1.0 / freqs[1:] # <1>
+    ax.loglog(period_h, psd[1:], linewidth=0.8) # <2>
+    for tau, label in [(8766, "1 año"), (168, "1 sem"), (24, "1 día"), (12, "12 h")]: # <3>
+        ax.axvline(tau, color="red", linestyle="--", alpha=0.5, linewidth=0.7)
+    ax.set_xlabel("Periodo (horas)")
+    ax.set_ylabel("PSD")
+    ax.set_title(title)
+    return ax
+
+freqs, psd = power_spectrum(regiones["NAL_DEMANDA"], fs=1.0)
+
+fig, ax = plt.subplots(figsize=(12, 6))
+plot_spectrum(freqs, psd, title="Espectro de potencia — Demanda Nacional", ax=ax)
+plt.tight_layout()
+plt.show()
+```
+
+1. Convertimos frecuencia a periodo en horas para facilitar la interpretación.
+2. Escala log-log para visualizar varias décadas de frecuencia.
+3. Líneas verticales en los ciclos principales: anual, semanal, diario y 12 h.
+
+
+
+## Espectro por región: 4 comportamientos {.smaller}
+
+```{python}
+#| fig-height: 6
+#| code-fold: true
+#| code-summary: "Código"
+ejemplos = {"NE": "Tipo 1: anual ≈ diario + semanal",
+            "BCS": "Tipo 2: anual + diario, sin semanal",
+            "ORI": "Tipo 3: diario > anual",
+            "CEN": "Tipo 4: diario + semanal, sin anual"}
+
+fig, axes = plt.subplots(2, 2, figsize=(11, 6))
+for ax, (reg, desc) in zip(axes.flat, ejemplos.items()):
+    f, p = power_spectrum(regiones[f"{reg}_DEMANDA"], fs=1.0)
+    plot_spectrum(f, p, title=f"{reg}: {desc}", ax=ax)
+plt.tight_layout()
+plt.show()
+```
+
+
+## Plegado de fase: ciclo anual {.smaller}
+
+```{python}
+#| code-fold: true
+#| code-summary: "Código"
+from scipy.optimize import curve_fit
+
+dem = regiones["NAL_DEMANDA"].dropna().copy()
+dem.index = pd.to_datetime(dem.index)
+
+t_hours = (dem.index - dem.index[0]).total_seconds() / 3600
+
+def sinusoidal(t, A, phi, offset):
+    return A * np.sin(2 * np.pi * t / tau_global + phi) + offset
+
+tau_global = 8766
+phase = t_hours % tau_global
+order = np.argsort(phase.values)
+phase_sorted = phase.values[order]
+dem_sorted = dem.values[order]
+
+p0 = [(dem_sorted.max() - dem_sorted.min()) / 2, 0, dem_sorted.mean()]
+popt, _ = curve_fit(sinusoidal, phase_sorted, dem_sorted, p0=p0)
+fit_t = np.linspace(0, tau_global, 500)
+fit_y = sinusoidal(fit_t, *popt)
+
+t0 = dem.index[0]
+dates = [t0 + pd.Timedelta(hours=h) for h in phase_sorted]
+fit_dates = pd.date_range(t0, periods=500, freq=f"{int(tau_global * 3600 / 500)}s")
+
+fig, ax = plt.subplots(figsize=(12, 5))
+ax.plot(dates, dem_sorted, linewidth=0.15, label="Ciclo medio")
+ax.plot(fit_dates, fit_y, '--', color="orange", linewidth=2, label="τ = 1 año")
+ax.set_ylabel("Demanda (MWh)")
+ax.set_ylim(20000,50_000)
+ax.legend(fontsize=10)
+plt.tight_layout()
+plt.show()
+```
+
+
+## Plegado de fase: ciclos cortos
+
+![](latex/img/ciclos_cortos.png){fig-align="center" width=90%}
+
+
+
+## Demanda vs. UTCI: dispersión estacional {.smaller}
+
+```{python}
+#| fig-height: 6
+#| code-fold: true
+#| code-summary: "Código"
+season_map = {12: "Invierno", 1: "Invierno", 2: "Invierno",
+              3: "Primavera", 4: "Primavera", 5: "Primavera",
+              6: "Verano", 7: "Verano", 8: "Verano",
+              9: "Otoño", 10: "Otoño", 11: "Otoño"}
+season_colors = {"Invierno": "#1f77b4", "Primavera": "#ff7f0e",
+                 "Verano": "#2ca02c", "Otoño": "#d62728"}
+
+regiones["season"] = regiones.index.month.map(season_map)
+
+fig, axes = plt.subplots(1, 3, figsize=(13, 5))
+for ax, reg in zip(axes, ["PEN", "CEN", "NO"]):
+    for s, color in season_colors.items():
+        mask = regiones["season"] == s
+        ax.scatter(regiones.loc[mask, f"{reg}_UTCI"],
+                   regiones.loc[mask, f"{reg}_DEMANDA"],
+                   s=0.3, alpha=0.3, color=color, label=s)
+    ax.set_xlabel("UTCI (°C)")
+    ax.set_ylabel("Demanda (MW)")
+    ax.set_title(reg)
+    ax.legend(markerscale=8, fontsize=8)
+
+fig.suptitle("Demanda vs. UTCI por estación — tres patrones representativos", fontsize=13)
+plt.tight_layout()
+plt.show()
+```
+
+
+## El lazo diario: demanda–UTCI {.smaller}
+
+```{python}
+#| fig-height: 5.5
+#| code-fold: true
+#| code-summary: "Código"
+regiones["hour"] = regiones.index.hour
+
+fig, axes = plt.subplots(1, 3, figsize=(13, 5))
+for ax, reg in zip(axes, ["PEN", "CEN", "NO"]):
+    for s, color in season_colors.items():
+        mask = regiones["season"] == s
+        hourly = regiones.loc[mask].groupby("hour")[[f"{reg}_UTCI", f"{reg}_DEMANDA"]].mean()
+        ax.plot(hourly[f"{reg}_UTCI"], hourly[f"{reg}_DEMANDA"],
+                'o-', color=color, label=s, markersize=3, linewidth=1.2)
+        # Marcar horas clave
+        for h, marker in [(0, "^"), (12, "o"), (23, "s")]:
+            if h in hourly.index:
+                ax.plot(hourly.loc[h, f"{reg}_UTCI"], hourly.loc[h, f"{reg}_DEMANDA"],
+                        marker=marker, color=color, markersize=7, markeredgecolor="black", linewidth=0)
+    ax.set_xlabel("UTCI (°C)")
+    ax.set_ylabel("Demanda (MW)")
+    ax.set_title(reg)
+    ax.legend(fontsize=8)
+
+fig.suptitle("Lazos diarios demanda–UTCI  (△=00h, ○=12h, □=23h)", fontsize=13)
+plt.tight_layout()
+plt.show()
+```
+
+
+## Desviación estacional respecto al invierno PEN
+
+![](latex/img/Peninsular.png){fig-align="center" width=90%}
+
+
+## Hallazgos clave
+
+::: {.incremental}
+- La demanda eléctrica en México muestra ciclos **diarios, semanales y anuales**, con pesos distintos según la región.
+- El UTCI replica los ciclos anual y diario de la demanda, pero **no el semanal** (origen social, no climático).
+- **No se observa** la forma de "V": en México el frío no genera aumento de demanda eléctrica.
+- El **estrés por calor fuerte** (UTCI > 32°C) es el motor principal del incremento de demanda.
+- La región **NO** casi duplica su demanda en verano; **CEN** permanece estable todo el año.
+:::
+
+
+## Conclusiones e implicaciones
+
+- El UTCI es un indicador **más completo** que la temperatura para estudiar demanda eléctrica.
+- Estos resultados son una **línea base** para escenarios de cambio climático:
+  - Si las temperaturas aumentan, la demanda en regiones como NO, N, NE crecerá **desproporcionadamente**.
+- La **heterogeneidad regional** exige políticas energéticas diferenciadas.
+- La integración de renovables debe considerar el **desajuste espacial** entre generación (zonas con recurso) y consumo (zonas de alta demanda térmica).
+
+
+## {background-color="#2c3e50" .center}
+
+::: {style="color: white; font-size: 1.8em; text-align: center;"}
+**Gracias**
+
+Datos y material suplementario:
+
+[github.com/AltamarMx/UTCI-supplementary](https://github.com/AltamarMx/UTCI-supplementary/)
+:::
